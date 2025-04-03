@@ -6,10 +6,6 @@ class_name AxeManAttack1
 var anim_player: AnimationPlayer
 var direction: float
 
-func update(_delta):
-	if enemy.current_hp <= 0:
-		Transitioned.emit(self, "die")
-
 func enter():
 	player = get_tree().get_first_node_in_group("Player")
 	anim_player = enemy.get_node("AnimationPlayer")

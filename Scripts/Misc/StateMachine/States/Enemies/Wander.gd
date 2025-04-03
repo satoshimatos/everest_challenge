@@ -27,9 +27,7 @@ func update(delta: float):
 	else:
 		if enemy.anim_player.has_animation("idle"):
 			enemy.anim_player.play("idle")
-	if enemy.current_hp <= 0:
-		Transitioned.emit(self, "die")
-		
+
 func physics_update(_delta: float):
 	if enemy:
 		enemy.velocity.x = move_direction * enemy.speed

@@ -8,6 +8,8 @@ var anim_player: AnimationPlayer
 var fade_out_timer: int = 5
 
 func enter():
+	enemy.gravity = 0
+	enemy.get_node("CollisionShape2D").disabled = true
 	enemy.velocity.x = 0
 	anim_player = enemy.get_node("AnimationPlayer")
 	anim_player.stop()
@@ -20,8 +22,6 @@ func enter():
 		update_state_label(enemy.state_label, self.name)
 
 func _on_animation_finished(_anim_name: String) -> void:
-	enemy.gravity = 0
-	enemy.get_node("CollisionShape2D").disabled = true
 	var tween = create_tween()
 	tween.tween_property(enemy.sprite, "modulate", Color(1, 1, 1, 0), fade_out_timer)
 	tween.set_trans(Tween.TRANS_SINE)

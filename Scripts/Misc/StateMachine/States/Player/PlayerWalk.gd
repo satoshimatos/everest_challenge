@@ -6,7 +6,7 @@ var anim_player: AnimationPlayer
 
 func enter():
 	anim_player = player.get_node("AnimationPlayer")
-	if anim_player.has_animation("idle"):
+	if anim_player.has_animation("walking"):
 		anim_player.play("walking")
 	update_state_label(player.state_label, self.name)
 
