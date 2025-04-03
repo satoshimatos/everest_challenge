@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://txoo4dfo8h56"]
+[gd_scene load_steps=27 format=3 uid="uid://txoo4dfo8h56"]
 
 [ext_resource type="Texture2D" uid="uid://bu1dithutlsbd" path="res://assets/graphics/characters/enemies/Orc-Hurt.png" id="1_fc5vk"]
 [ext_resource type="Script" path="res://Scripts/Enemies/AxeMan.gd" id="1_wi8ut"]
@@ -11,6 +11,11 @@
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Wander.gd" id="9_odq5l"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Chase.gd" id="10_ll1d1"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/AxeMan/AxeManAttack1.gd" id="11_ft6kp"]
+[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="12_6q8nr"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/TakeDamage.gd" id="12_ntk0b"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Die.gd" id="13_eesou"]
+[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="13_jqa8w"]
+[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="14_v7qs3"]
 
 [sub_resource type="Animation" id="Animation_o88ln"]
 length = 0.001
@@ -150,7 +155,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_i5v28"]
 resource_name = "damage"
-length = 0.1
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -316,7 +321,9 @@ radius = 12.0
 
 [node name="AxeMan" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 771
 script = ExtResource("1_wi8ut")
+enemy_name = "ArmoredAxeMan"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_o4jjx")
@@ -345,6 +352,14 @@ enemy = NodePath("../..")
 script = ExtResource("11_ft6kp")
 enemy = NodePath("../..")
 
+[node name="TakeDamage" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("12_ntk0b")
+enemy = NodePath("../..")
+
+[node name="Die" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("13_eesou")
+enemy = NodePath("../..")
+
 [node name="StateLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -356,9 +371,20 @@ shape = SubResource("CircleShape2D_y6h2g")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
 position = Vector2(17, -6)
+collision_layer = 4
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("CircleShape2D_3n161")
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -21.0
+offset_right = 29.0
+offset_bottom = 19.0
+value = 50.0
+texture_under = ExtResource("12_6q8nr")
+texture_over = ExtResource("13_jqa8w")
+texture_progress = ExtResource("14_v7qs3")
 
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

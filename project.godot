@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/Maps/forest_1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EnemyDb="*res://Scripts/Global/EnemyDatabase.gd"
+PlayerStats="*res://Scripts/Global/PlayerStats.gd"
+
 [global_group]
 
 Player=""

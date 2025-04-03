@@ -16,6 +16,8 @@ func _ready() -> void:
 		current_state = initial_state
 
 func _process(delta: float) -> void:
+	#if get_parent().name == "AxeMan":
+		#print(current_state)
 	if current_state:
 		current_state.update(delta)
 		

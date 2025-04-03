@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3y0bs5fsr21l"]
+[gd_scene load_steps=29 format=3 uid="uid://d3y0bs5fsr21l"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5d2un"]
 [ext_resource type="Texture2D" uid="uid://bji2jsg48ipym" path="res://assets/graphics/characters/player/Soldier-Attack01.png" id="1_x3bwi"]
@@ -8,9 +8,13 @@
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerFloorAttack.gd" id="6_e0wki"]
 [ext_resource type="Texture2D" uid="uid://bgjbcmanowjh0" path="res://assets/graphics/characters/player/Soldier-Death.png" id="6_ilqna"]
 [ext_resource type="Texture2D" uid="uid://b8a6qr1xr7lns" path="res://assets/graphics/characters/player/Soldier-Walk.png" id="6_ug6w4"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerAerialAttack.gd" id="7_10d8m"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerFreefall.gd" id="8_eogkt"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerLandingAttack.gd" id="9_71eva"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="9_ewiaw"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerIdle.gd" id="10_ts7ei"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerWalk.gd" id="11_2yo1g"]
+[ext_resource type="Texture2D" uid="uid://d23wgi6auln70" path="res://assets/graphics/characters/player/Soldier-Jump.png" id="14_sekal"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_miy04"]
 radius = 7.0
@@ -113,7 +117,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_aafu1"]
 resource_name = "attack2"
-length = 0.5
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -145,10 +149,24 @@ tracks/2/path = NodePath("Sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4, 5]
+"values": [2, 3, 4]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"attack_hitbox_disabler"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_bk2l4"]
@@ -231,6 +249,46 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_6wwa0"]
+resource_name = "freefall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_sekal")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_gmqal"]
 resource_name = "idle"
 length = 1.2
@@ -270,6 +328,60 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_om3y1"]
+resource_name = "landing_attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_gty0k")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"attack_hitbox_disabler"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_h4kt7"]
@@ -323,7 +435,9 @@ _data = {
 "attack2": SubResource("Animation_aafu1"),
 "damage": SubResource("Animation_bk2l4"),
 "death": SubResource("Animation_6r6a6"),
+"freefall": SubResource("Animation_6wwa0"),
 "idle": SubResource("Animation_gmqal"),
+"landing_attack": SubResource("Animation_om3y1"),
 "new_animation": SubResource("Animation_h4kt7"),
 "walking": SubResource("Animation_ftxcp")
 }
@@ -358,6 +472,15 @@ script = ExtResource("11_2yo1g")
 [node name="FloorAttack" type="Node" parent="StateMachine"]
 script = ExtResource("6_e0wki")
 
+[node name="AerialAttack" type="Node" parent="StateMachine"]
+script = ExtResource("7_10d8m")
+
+[node name="Freefall" type="Node" parent="StateMachine"]
+script = ExtResource("8_eogkt")
+
+[node name="LandingAttack" type="Node" parent="StateMachine"]
+script = ExtResource("9_71eva")
+
 [node name="StateLabel" type="Label" parent="." groups=["PlayerStateLabel"]]
 layout_direction = 1
 offset_right = 40.0
@@ -373,6 +496,7 @@ autoplay = "idle"
 
 [node name="AttackHitbox" type="Area2D" parent="."]
 position = Vector2(19, -7)
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
