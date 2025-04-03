@@ -1,25 +1,27 @@
-[gd_scene load_steps=29 format=3 uid="uid://txoo4dfo8h56"]
+[gd_scene load_steps=32 format=3 uid="uid://71uren7uwvc6"]
 
-[ext_resource type="Texture2D" uid="uid://bu1dithutlsbd" path="res://assets/graphics/characters/enemies/Orc-Hurt.png" id="1_fc5vk"]
-[ext_resource type="Script" path="res://Scripts/Enemies/AxeMan.gd" id="1_wi8ut"]
-[ext_resource type="Texture2D" uid="uid://d1lu50jhkdg0b" path="res://assets/graphics/characters/enemies/Orc-Death.png" id="2_7ajgy"]
-[ext_resource type="Shader" path="res://Shaders/Blink.gdshader" id="2_q1j06"]
-[ext_resource type="Texture2D" uid="uid://bttxa31akea77" path="res://assets/graphics/characters/enemies/Orc-Idle.png" id="3_o4jjx"]
-[ext_resource type="Texture2D" uid="uid://ulq4x8ljnu5h" path="res://assets/graphics/characters/enemies/Orc-Walk.png" id="4_1dl7v"]
-[ext_resource type="Texture2D" uid="uid://cp6ltywuvawo" path="res://assets/graphics/characters/enemies/Orc-Attack01.png" id="5_ac57m"]
-[ext_resource type="Texture2D" uid="uid://coalhda3pagdb" path="res://assets/graphics/characters/enemies/Orc-Attack02.png" id="6_yltus"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="8_h8hxk"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Wander.gd" id="9_odq5l"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Chase.gd" id="10_ll1d1"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/AxeMan/AxeManAttack1.gd" id="11_ft6kp"]
-[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="12_6q8nr"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/TakeDamage.gd" id="12_ntk0b"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Die.gd" id="13_eesou"]
-[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="13_jqa8w"]
-[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="14_v7qs3"]
+[ext_resource type="Script" path="res://Scripts/Enemies/AxeManHard.gd" id="1_4cuqd"]
+[ext_resource type="Shader" path="res://Shaders/Blink.gdshader" id="2_0jldh"]
+[ext_resource type="Texture2D" uid="uid://bttxa31akea77" path="res://assets/graphics/characters/enemies/Orc-Idle.png" id="2_jclmx"]
+[ext_resource type="Texture2D" uid="uid://cp6ltywuvawo" path="res://assets/graphics/characters/enemies/Orc-Attack01.png" id="3_ywmr6"]
+[ext_resource type="Texture2D" uid="uid://coalhda3pagdb" path="res://assets/graphics/characters/enemies/Orc-Attack02.png" id="4_rrv15"]
+[ext_resource type="Texture2D" uid="uid://bu1dithutlsbd" path="res://assets/graphics/characters/enemies/Orc-Hurt.png" id="5_7fxva"]
+[ext_resource type="Texture2D" uid="uid://d1lu50jhkdg0b" path="res://assets/graphics/characters/enemies/Orc-Death.png" id="6_7jb1n"]
+[ext_resource type="Texture2D" uid="uid://ulq4x8ljnu5h" path="res://assets/graphics/characters/enemies/Orc-Walk.png" id="7_0b1w5"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="8_t50vr"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Wander.gd" id="9_msfj7"]
+[ext_resource type="Texture2D" uid="uid://dlvii6litl3qq" path="res://assets/graphics/characters/enemies/Orc-Jump.png" id="9_xfr6t"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Chase.gd" id="10_ubj6a"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/AxeMan/AxeManAttack1.gd" id="11_5i8sx"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/TakeDamage.gd" id="12_v5rpo"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Die.gd" id="13_wmkk0"]
+[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="14_w6321"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/RecoveryDodge.gd" id="15_7c7si"]
+[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="15_y63gb"]
+[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="16_1vndm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4rj1"]
-shader = ExtResource("2_q1j06")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u5jm"]
+shader = ExtResource("2_0jldh")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
 
@@ -47,7 +49,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_o4jjx")]
+"values": [ExtResource("2_jclmx")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -75,7 +77,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_ac57m")]
+"values": [ExtResource("3_ywmr6")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -132,7 +134,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_yltus")]
+"values": [ExtResource("4_rrv15")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -172,7 +174,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_fc5vk")]
+"values": [ExtResource("5_7fxva")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -200,7 +202,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_7ajgy")]
+"values": [ExtResource("6_7jb1n")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -252,7 +254,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_o4jjx")]
+"values": [ExtResource("2_jclmx")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -281,7 +283,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_1dl7v")]
+"values": [ExtResource("7_0b1w5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -308,6 +310,46 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_72ya1"]
+resource_name = "jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_xfr6t")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l5bum"]
 _data = {
 "RESET": SubResource("Animation_o88ln"),
@@ -316,6 +358,7 @@ _data = {
 "damage": SubResource("Animation_i5v28"),
 "death": SubResource("Animation_dyhjv"),
 "idle": SubResource("Animation_tdgne"),
+"jump": SubResource("Animation_72ya1"),
 "walking": SubResource("Animation_yoo65")
 }
 
@@ -325,15 +368,15 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3n161"]
 radius = 12.0
 
-[node name="AxeMan" type="CharacterBody2D"]
+[node name="AxeManHard" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 771
-script = ExtResource("1_wi8ut")
-enemy_name = "ArmoredAxeMan"
+script = ExtResource("1_4cuqd")
+enemy_name = "ArmoredAxeManHard"
 
 [node name="Sprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_d4rj1")
-texture = ExtResource("3_o4jjx")
+material = SubResource("ShaderMaterial_6u5jm")
+texture = ExtResource("2_jclmx")
 offset = Vector2(0, -7)
 hframes = 6
 
@@ -344,27 +387,31 @@ libraries = {
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("8_h8hxk")
+script = ExtResource("8_t50vr")
 initial_state = NodePath("Wander")
 
 [node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("9_odq5l")
+script = ExtResource("9_msfj7")
 enemy = NodePath("../..")
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("10_ll1d1")
+script = ExtResource("10_ubj6a")
 enemy = NodePath("../..")
 
 [node name="Attack1" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_ft6kp")
+script = ExtResource("11_5i8sx")
 enemy = NodePath("../..")
 
 [node name="TakeDamage" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("12_ntk0b")
+script = ExtResource("12_v5rpo")
 enemy = NodePath("../..")
 
 [node name="Die" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("13_eesou")
+script = ExtResource("13_wmkk0")
+enemy = NodePath("../..")
+
+[node name="RecoveryDodge" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("15_7c7si")
 enemy = NodePath("../..")
 
 [node name="StateLabel" type="Label" parent="."]
@@ -390,8 +437,8 @@ offset_top = -21.0
 offset_right = 29.0
 offset_bottom = 19.0
 value = 50.0
-texture_under = ExtResource("12_6q8nr")
-texture_over = ExtResource("13_jqa8w")
-texture_progress = ExtResource("14_v7qs3")
+texture_under = ExtResource("14_w6321")
+texture_over = ExtResource("15_y63gb")
+texture_progress = ExtResource("16_1vndm")
 
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

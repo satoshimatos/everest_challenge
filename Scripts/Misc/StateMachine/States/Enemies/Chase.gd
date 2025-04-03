@@ -9,10 +9,6 @@ func enter():
 	if (enemy.state_label):
 		update_state_label(enemy.state_label, self.name)
 
-func update(_delta):
-	if enemy.current_hp <= 0:
-		Transitioned.emit(self, "die")
-
 func physics_update(_delta: float):
 	var direction = player.global_position.x - enemy.global_position.x
 	

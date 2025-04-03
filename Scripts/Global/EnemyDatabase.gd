@@ -15,6 +15,16 @@ func _ready() -> void:
 					"attack_distance": 25.0,
 					"give_up_distance": 150.0,
 					"detection_range": 100.0,
+				},
+				"ArmoredAxeManHard": {
+					"hp": 50,
+					"base_speed": 35,
+					"attack": 6,
+					"defense": 15,
+					"attack_speed": 4,
+					"attack_distance": 25.0,
+					"give_up_distance": 150.0,
+					"detection_range": 100.0,
 				}
 			},
 			"miniboss": {},

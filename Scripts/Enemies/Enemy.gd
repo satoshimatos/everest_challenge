@@ -25,6 +25,7 @@ class_name Enemy
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_move: bool = true
+var is_invulnerable = false
 
 func _physics_process(delta: float) -> void:
 	if can_move:
@@ -51,9 +52,10 @@ func set_hp_bar():
 
 func _take_damage(body: CharacterBody2D, damage: float):
 	if body == self:
-		var final_damage = calculate_damage(damage)
-		current_hp -= final_damage
-		hp_bar.value = current_hp
+		if not is_invulnerable:
+			var final_damage = calculate_damage(damage)
+			current_hp -= final_damage
+			hp_bar.value = current_hp
 
 func calculate_damage(damage_value: float) -> float:
 	return damage_value - (damage_value * defense / 100)

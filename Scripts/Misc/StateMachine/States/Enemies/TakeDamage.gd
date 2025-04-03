@@ -3,6 +3,7 @@ extends State
 class_name TakeDamage
 
 @export var enemy: CharacterBody2D
+@onready var sprite = enemy.get_node("Sprite")
 var anim_player: AnimationPlayer
 
 func update(_delta):
@@ -11,7 +12,7 @@ func update(_delta):
 
 func enter():
 	enemy.can_move = false
-	flash_white()
+	flash()
 	anim_player = enemy.get_node("AnimationPlayer")
 	anim_player.stop()
 	if anim_player.animation_finished.is_connected(_on_animation_finished):
@@ -30,13 +31,19 @@ func physics_update(_delta: float):
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if enemy.current_hp > 0:
+		Transitioned.emit(self, "recoverydodge")
 		Transitioned.emit(self, "wander")
 
-func flash_white():
+func flash():
 	var tween = create_tween()
-	enemy.sprite.modulate = Color(5, 5, 5, 1)
-	tween.tween_property(enemy.sprite, "modulate", Color(1, 1, 1, 1), 0.1)
+	tween.tween_method(set_shader_blink_intensity, 1.0, 0.0, 0.2)
 
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-	#tween.tween_callback(enemy.queue_free)
+func set_shader_blink_intensity(value: float):
+	if sprite and sprite.material is ShaderMaterial:
+		var exists = sprite.material.get_shader_parameter("blink_intensity") 
+		if exists != null:
+			sprite.material.set_shader_parameter("blink_intensity", value)
+		else:
+			print("Warning: Shader does not have 'blink_intensity' parameter!")
+	else:
+		print("Warning: No ShaderMaterial found on sprite!")
