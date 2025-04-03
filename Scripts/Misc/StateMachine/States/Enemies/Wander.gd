@@ -12,11 +12,9 @@ func randomize_wander():
 	wander_time = randf_range(1, 2)
 
 func enter():
-	if current_entity == enemy:
-		current_entity = null
-		randomize_wander()
-		if (enemy.state_label):
-			update_state_label(enemy.state_label, self.name)
+	randomize_wander()
+	if (enemy.state_label):
+		update_state_label(enemy.state_label, self.name)
 
 func update(delta: float):
 	if wander_time > 0:

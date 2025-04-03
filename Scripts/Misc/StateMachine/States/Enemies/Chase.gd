@@ -5,8 +5,6 @@ class_name EnemyChase
 @export var enemy: CharacterBody2D
 
 func enter():
-	if current_entity == enemy:
-		current_entity = null
 	player = get_tree().get_first_node_in_group("Player")
 	if (enemy.state_label):
 		update_state_label(enemy.state_label, self.name)

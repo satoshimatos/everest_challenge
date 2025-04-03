@@ -8,18 +8,16 @@ var anim_player: AnimationPlayer
 var fade_out_timer: int = 5
 
 func enter():
-	if current_entity == enemy:
-		current_entity = null
-		enemy.velocity.x = 0
-		anim_player = enemy.get_node("AnimationPlayer")
-		anim_player.stop()
-		if anim_player.animation_finished.is_connected(_on_animation_finished):
-			anim_player.animation_finished.disconnect(_on_animation_finished)
-		anim_player.animation_finished.connect(_on_animation_finished)
-		if anim_player.has_animation("death"):
-			anim_player.play("death")
-		if (enemy.state_label):
-			update_state_label(enemy.state_label, self.name)
+	enemy.velocity.x = 0
+	anim_player = enemy.get_node("AnimationPlayer")
+	anim_player.stop()
+	if anim_player.animation_finished.is_connected(_on_animation_finished):
+		anim_player.animation_finished.disconnect(_on_animation_finished)
+	anim_player.animation_finished.connect(_on_animation_finished)
+	if anim_player.has_animation("death"):
+		anim_player.play("death")
+	if (enemy.state_label):
+		update_state_label(enemy.state_label, self.name)
 
 func _on_animation_finished(_anim_name: String) -> void:
 	enemy.gravity = 0

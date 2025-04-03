@@ -30,5 +30,5 @@ func _input(event: InputEvent) -> void:
 	pass
 
 func take_damage(body: CharacterBody2D, value: float):
-	current_entity = body
-	Transitioned.emit(self, "takedamage")
+	if owner == body:
+		Transitioned.emit(self, "takedamage")

@@ -10,19 +10,17 @@ func update(_delta):
 		Transitioned.emit(self, "die")
 
 func enter():
-	if current_entity == enemy:
-		current_entity = null
-		enemy.can_move = false
-		flash_white()
-		anim_player = enemy.get_node("AnimationPlayer")
-		anim_player.stop()
-		if anim_player.animation_finished.is_connected(_on_animation_finished):
-			anim_player.animation_finished.disconnect(_on_animation_finished)
-		anim_player.animation_finished.connect(_on_animation_finished)
-		if anim_player.has_animation("damage"):
-			anim_player.play("damage")
-		if (enemy.state_label):
-			update_state_label(enemy.state_label, self.name)
+	enemy.can_move = false
+	flash_white()
+	anim_player = enemy.get_node("AnimationPlayer")
+	anim_player.stop()
+	if anim_player.animation_finished.is_connected(_on_animation_finished):
+		anim_player.animation_finished.disconnect(_on_animation_finished)
+	anim_player.animation_finished.connect(_on_animation_finished)
+	if anim_player.has_animation("damage"):
+		anim_player.play("damage")
+	if (enemy.state_label):
+		update_state_label(enemy.state_label, self.name)
 
 func exit():
 	enemy.can_move = true

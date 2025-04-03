@@ -11,8 +11,6 @@ func update(_delta):
 		Transitioned.emit(self, "die")
 
 func enter():
-	if current_entity == enemy:
-		current_entity = null
 	player = get_tree().get_first_node_in_group("Player")
 	anim_player = enemy.get_node("AnimationPlayer")
 	if anim_player.animation_finished.is_connected(_on_animation_finished):

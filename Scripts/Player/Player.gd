@@ -55,5 +55,4 @@ func attack_hitbox_disabler(is_active: bool):
 	attack_hitbox.get_node("CollisionShape2D").disabled = is_active
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
-	print(body)
 	DamageDealt.emit(body, player_stats.stats["attack"])
