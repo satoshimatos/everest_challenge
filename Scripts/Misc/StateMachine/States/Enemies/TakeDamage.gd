@@ -25,8 +25,8 @@ func enter():
 func exit():
 	enemy.can_move = true
 
-func physics_update(delta: float):
-	var direction = player.global_position.x - enemy.global_position.x
+func physics_update(_delta: float):
+	pass
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if enemy.current_hp > 0:

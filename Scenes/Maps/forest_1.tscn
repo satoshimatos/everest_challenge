@@ -18,7 +18,7 @@ repeat_size = Vector2(1184, 0)
 texture = ExtResource("5_bdtv4")
 
 [node name="Player" parent="." instance=ExtResource("1_co4ke")]
-position = Vector2(808, 0)
+position = Vector2(8, 8)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0

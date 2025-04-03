@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3y0bs5fsr21l"]
+[gd_scene load_steps=34 format=3 uid="uid://d3y0bs5fsr21l"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5d2un"]
 [ext_resource type="Texture2D" uid="uid://bji2jsg48ipym" path="res://assets/graphics/characters/player/Soldier-Attack01.png" id="1_x3bwi"]
@@ -12,9 +12,14 @@
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerFreefall.gd" id="8_eogkt"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerLandingAttack.gd" id="9_71eva"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="9_ewiaw"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerDead.gd" id="10_fwx7a"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerIdle.gd" id="10_ts7ei"]
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerWalk.gd" id="11_2yo1g"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerTakeDamage.gd" id="11_mcjyr"]
 [ext_resource type="Texture2D" uid="uid://d23wgi6auln70" path="res://assets/graphics/characters/player/Soldier-Jump.png" id="14_sekal"]
+[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="16_y8423"]
+[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="17_j6g1f"]
+[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="18_rj7kf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_miy04"]
 radius = 7.0
@@ -56,6 +61,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_in2ns"]
@@ -481,6 +498,12 @@ script = ExtResource("8_eogkt")
 [node name="LandingAttack" type="Node" parent="StateMachine"]
 script = ExtResource("9_71eva")
 
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("10_fwx7a")
+
+[node name="TakeDamage" type="Node" parent="StateMachine"]
+script = ExtResource("11_mcjyr")
+
 [node name="StateLabel" type="Label" parent="." groups=["PlayerStateLabel"]]
 layout_direction = 1
 offset_right = 40.0
@@ -501,5 +524,15 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("CircleShape2D_bdlkj")
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -21.0
+offset_right = 29.0
+offset_bottom = 19.0
+value = 50.0
+texture_under = ExtResource("16_y8423")
+texture_over = ExtResource("17_j6g1f")
+texture_progress = ExtResource("18_rj7kf")
 
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

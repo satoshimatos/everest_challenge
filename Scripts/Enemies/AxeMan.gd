@@ -17,8 +17,10 @@ func flip_enemy():
 		sprite.flip_h = false
 		attack_hitbox.position.x = attack_hitbox_original_position.x
 
-func _on_attack_hitbox_body_entered(body: Node2D) -> void:
-	pass
-
 func attack_hitbox_disabler(is_active: bool):
 	attack_hitbox.get_node("CollisionShape2D").disabled = is_active
+
+func _on_attack_hitbox_body_entered(body: Node2D) -> void:
+	if body == player:
+		if not player.is_invulnerable:
+			player._take_damage(attack, self)

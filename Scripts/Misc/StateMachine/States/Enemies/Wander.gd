@@ -30,7 +30,7 @@ func update(delta: float):
 	if enemy.current_hp <= 0:
 		Transitioned.emit(self, "die")
 		
-func physics_update(delta: float):
+func physics_update(_delta: float):
 	if enemy:
 		enemy.velocity.x = move_direction * enemy.speed
 

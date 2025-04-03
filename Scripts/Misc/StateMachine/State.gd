@@ -26,7 +26,7 @@ func physics_update(_delta: float):
 func update_state_label(label: Label, state: String):
 	label.text = state
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 
 func take_damage(body: CharacterBody2D, value: float):

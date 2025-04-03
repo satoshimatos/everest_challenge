@@ -13,7 +13,7 @@ func update(_delta):
 	if enemy.current_hp <= 0:
 		Transitioned.emit(self, "die")
 
-func physics_update(delta: float):
+func physics_update(_delta: float):
 	var direction = player.global_position.x - enemy.global_position.x
 	
 	if direction > enemy.attack_distance:

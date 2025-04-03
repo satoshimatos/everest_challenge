@@ -12,7 +12,7 @@ func enter():
 	if player.state_label:
 		update_state_label(player.state_label, self.name)
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if player.is_on_floor():
 		if player.velocity.x != 0:
 			Transitioned.emit(self, "walk")

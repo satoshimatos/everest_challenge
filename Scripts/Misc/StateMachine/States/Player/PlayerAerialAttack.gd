@@ -19,7 +19,7 @@ func enter():
 	if player.state_label:
 		update_state_label(player.state_label, self.name)
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	player.velocity.y = aerial_attack_fall_speed
 
 func _on_animation_finished(_anim_name: String):

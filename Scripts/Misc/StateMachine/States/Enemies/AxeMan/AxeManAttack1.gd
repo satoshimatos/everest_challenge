@@ -24,7 +24,7 @@ func exit():
 	enemy.velocity.x = 0
 	anim_player.speed_scale = 1
 
-func physics_update(delta: float):
+func physics_update(_delta: float):
 	direction = player.global_position.x - enemy.global_position.x
 	if abs(direction) <= enemy.attack_distance:
 		anim_player.speed_scale = enemy.attack_speed
