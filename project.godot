@@ -32,6 +32,8 @@ window/stretch/mode="canvas_items"
 
 Player=""
 PlayerStateLabel=""
+Enemies=""
+PlayerHud=""
 
 [input]
 

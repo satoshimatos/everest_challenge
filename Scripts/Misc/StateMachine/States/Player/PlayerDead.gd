@@ -5,6 +5,7 @@ class_name PlayerDead
 var anim_player: AnimationPlayer
 
 func enter():
+	player.set_collision_layer_value(10, false)
 	player.velocity = Vector2.ZERO  # Stop movement
 	player.set_physics_process(false)  # Disable physics updates
 	anim_player = player.get_node("AnimationPlayer")
