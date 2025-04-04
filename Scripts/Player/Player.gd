@@ -3,13 +3,14 @@ extends CharacterBody2D
 class_name Player
 
 signal DamageDealt
+signal DamageTaken
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var state_label: Label = $StateLabel
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_hitbox_original_position = attack_hitbox.position
 @onready var player_stats: Node = get_node("/root/PlayerStats")
-@onready var hp_bar: TextureProgressBar = $HPBar
+
 @onready var state_machine: StateMachine = $StateMachine
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
@@ -25,9 +26,10 @@ var affected_by_gravity = true
 var player_can_move: bool = true
 var last_attacker: CharacterBody2D
 var is_invulnerable: bool = false
+var current_hp: float
 
 func _ready() -> void:
-	set_hp_bar()
+	current_hp = hp
 	attack_hitbox_disabler(true)
 
 func _physics_process(delta: float) -> void:
@@ -60,6 +62,10 @@ func _input(event: InputEvent) -> void:
 		if player_can_move:
 			if event.is_action_pressed("jump"):
 				velocity.y = jump_velocity
+	if event.is_action_pressed("ui_cancel"):
+		var enemies = get_tree().get_nodes_in_group("Enemies")
+		for enemy in enemies:
+			enemy._die()
 
 func attack_hitbox_disabler(is_active: bool):
 	attack_hitbox.get_node("CollisionShape2D").disabled = is_active
@@ -67,19 +73,15 @@ func attack_hitbox_disabler(is_active: bool):
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	DamageDealt.emit(body, player_stats.stats["attack"])
 
-func set_hp_bar():
-	hp_bar.tint_progress = Color.GREEN
-	hp_bar.max_value = hp
-	hp_bar.min_value = 0.0
-	hp_bar.value = hp
+
 
 func _take_damage(value: float, attacker: CharacterBody2D):
 	last_attacker = attacker
 	var final_damage = calculate_damage(value)
-	hp -= final_damage
-	hp_bar.value = hp
+	current_hp -= final_damage
+	DamageTaken.emit(current_hp)
 	state_machine.transition_to("takedamage")
-	if hp <= 0:
+	if current_hp <= 0:
 		state_machine.transition_to("dead")
 	
 func calculate_damage(damage_value: float) -> float:
@@ -98,3 +100,8 @@ func give_invulnerability():
 	tween.stop()  # Stop blinking
 	modulate = Color(1, 1, 1, 1)  # Ensure the player is fully visible again
 	is_invulnerable = false
+
+func _die():
+	current_hp = 0
+	DamageTaken.emit(current_hp)
+	state_machine.transition_to("dead")
