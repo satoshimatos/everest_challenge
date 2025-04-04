@@ -17,6 +17,8 @@ func enter():
 		update_state_label(enemy.state_label, self.name)
 
 func exit():
+	var attack_hitbox_collider = enemy.attack_hitbox.get_node("CollisionShape2D")
+	attack_hitbox_collider.set_deferred("disabled", true)
 	enemy.velocity.x = 0
 	anim_player.speed_scale = 1
 

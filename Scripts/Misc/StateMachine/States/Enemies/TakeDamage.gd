@@ -24,6 +24,7 @@ func enter():
 		update_state_label(enemy.state_label, self.name)
 
 func exit():
+	enemy.velocity.x = 0
 	enemy.can_move = true
 
 func physics_update(_delta: float):

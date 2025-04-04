@@ -6,6 +6,7 @@ class_name Enemy
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("Player")
 @onready var sprite: Sprite2D = $Sprite
 @onready var state_label: Label = $StateLabel
+@onready var state_machine: StateMachine = $StateMachine
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_hitbox_original_position: Vector2 = attack_hitbox.position
@@ -26,6 +27,7 @@ class_name Enemy
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_move: bool = true
 var is_invulnerable = false
+var can_flip: bool = true
 
 func _physics_process(delta: float) -> void:
 	if can_move:
@@ -59,3 +61,7 @@ func _take_damage(body: CharacterBody2D, damage: float):
 
 func calculate_damage(damage_value: float) -> float:
 	return damage_value - (damage_value * defense / 100)
+
+func _die():
+	_take_damage(self, 999999)
+	state_machine.transition_to("die")
