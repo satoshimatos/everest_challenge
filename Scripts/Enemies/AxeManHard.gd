@@ -1,8 +1,8 @@
-extends Enemy
+extends ArmoredAxeMan
 
 class_name ArmoredAxeManHard
 
-var direction: Vector2
+@onready var obstacle_raycast: RayCast2D = $ObstacleRayCast
 
 func _ready() -> void:
 	player.DamageDealt.connect(_take_damage)
@@ -13,9 +13,11 @@ func flip_enemy():
 	if velocity.x < 0:
 		sprite.flip_h = true
 		attack_hitbox.position.x = -attack_hitbox_original_position.x
+		obstacle_raycast.rotation_degrees = 180
 	elif velocity.x > 0:
 		sprite.flip_h = false
 		attack_hitbox.position.x = attack_hitbox_original_position.x
+		obstacle_raycast.rotation_degrees = 0
 
 func attack_hitbox_disabler(is_active: bool):
 	attack_hitbox.get_node("CollisionShape2D").disabled = is_active
