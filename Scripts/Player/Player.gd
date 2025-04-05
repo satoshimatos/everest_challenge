@@ -4,6 +4,7 @@ class_name Player
 
 signal DamageDealt
 signal DamageTaken
+signal StaminaChanged
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var state_label: Label = $StateLabel
@@ -16,6 +17,8 @@ signal DamageTaken
 
 @onready var speed: int = player_stats.stats["move_speed"]
 @onready var hp: float = player_stats.stats["hp"]
+@onready var stamina: float = player_stats.stats["stamina"]
+@onready var stamina_regen: float = player_stats.stats["stamina_regen"]
 @onready var defense: float = player_stats.stats["defense"]
 @onready var attack: float = player_stats.stats["attack"]
 @onready var invulnerability_time: float = player_stats.stats["invulnerability_time"]
@@ -27,15 +30,20 @@ var player_can_move: bool = true
 var last_attacker: CharacterBody2D
 var is_invulnerable: bool = false
 var current_hp: float
+var current_stamina: float
+var can_regen_stamina: bool = true
 
 func _ready() -> void:
 	current_hp = hp
+	current_stamina = stamina
 	attack_hitbox_disabler(true)
 
 func _physics_process(delta: float) -> void:
 	state_label.global_position = self.global_position
 	move_player(delta)
 	move_and_slide()
+	if can_regen_stamina:
+		regen_stamina()
 
 func move_player(delta) -> void:
 	if affected_by_gravity:
@@ -67,13 +75,11 @@ func _input(event: InputEvent) -> void:
 		for enemy in enemies:
 			enemy._die()
 
-func attack_hitbox_disabler(is_active: bool):
-	attack_hitbox.get_node("CollisionShape2D").disabled = is_active
+func attack_hitbox_disabler(state: bool):
+	attack_hitbox.get_node("CollisionShape2D").call_deferred("set", "disabled", state)
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	DamageDealt.emit(body, player_stats.stats["attack"])
-
-
 
 func _take_damage(value: float, attacker: CharacterBody2D):
 	last_attacker = attacker
@@ -105,3 +111,9 @@ func _die():
 	current_hp = 0
 	DamageTaken.emit(current_hp)
 	state_machine.transition_to("dead")
+
+func regen_stamina():
+	if current_stamina != stamina:
+		current_stamina += stamina_regen
+		current_stamina = clamp(current_stamina, -stamina, stamina)
+		StaminaChanged.emit(current_stamina)
