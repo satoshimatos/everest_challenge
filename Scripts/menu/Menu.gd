@@ -4,8 +4,11 @@ extends Control
 @onready var play_btn: Button = $MarginContainer/VBoxContainer/Play
 @onready var options_btn: Button = $MarginContainer/VBoxContainer/Options
 @onready var quit_btn: Button = $MarginContainer/VBoxContainer/Quit
+@onready var options_scene = preload("res://scenes/maps/Options.tscn").instantiate()
 
 func _ready() -> void:
+	options_scene.visible = false
+	add_child(options_scene)
 	retranslate()
 	Translator.LanguageChanged.connect(retranslate)
 
@@ -22,7 +25,7 @@ func _on_play_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	AudioManager.play("select")
-	get_tree().change_scene_to_file("res://scenes/maps/Options.tscn")
+	options_scene.visible = true
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

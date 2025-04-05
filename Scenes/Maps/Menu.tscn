@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dml472mkdmesg"]
+[gd_scene load_steps=5 format=3 uid="uid://dml472mkdmesg"]
 
 [ext_resource type="Script" path="res://scripts/menu/Menu.gd" id="1_tmpmn"]
+[ext_resource type="Texture2D" uid="uid://qbpflb2efhy8" path="res://assets/graphics/scenery/parallax/layer3.png" id="2_463uo"]
+[ext_resource type="Texture2D" uid="uid://bkhv0hcvd485j" path="res://assets/graphics/scenery/parallax/layer1.png" id="2_hxxfq"]
+[ext_resource type="Texture2D" uid="uid://dwlpo3a2h1f72" path="res://assets/graphics/scenery/parallax/layer2.png" id="2_sumyo"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -10,6 +13,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tmpmn")
+
+[node name="Layer1" type="Parallax2D" parent="."]
+scroll_offset = Vector2(56, 80)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(5, 0)
+
+[node name="Layer1" type="Sprite2D" parent="Layer1"]
+position = Vector2(0, 16)
+texture = ExtResource("2_hxxfq")
+
+[node name="Layer2" type="Parallax2D" parent="."]
+scroll_offset = Vector2(56, 80)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(10, 0)
+
+[node name="Layer2" type="Sprite2D" parent="Layer2"]
+position = Vector2(0, 16)
+texture = ExtResource("2_sumyo")
+
+[node name="Layer3" type="Parallax2D" parent="."]
+scroll_offset = Vector2(56, 80)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(50, 0)
+
+[node name="Layer3" type="Sprite2D" parent="Layer3"]
+position = Vector2(0, 16)
+texture = ExtResource("2_463uo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
