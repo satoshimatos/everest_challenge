@@ -12,7 +12,6 @@ func randomize_wander():
 	wander_time = randf_range(1, 2)
 
 func enter():
-	print("wander")
 	randomize_wander()
 	if (enemy.state_label):
 		update_state_label(enemy.state_label, self.name)
@@ -36,4 +35,5 @@ func physics_update(_delta: float):
 	var direction = player.global_position - enemy.global_position
 	
 	if direction.length() < enemy.detection_range:
-		Transitioned.emit(self, "chase")
+		AudioManager.play("grunt1")
+		call_deferred("emit_deferred_transition", "chase")

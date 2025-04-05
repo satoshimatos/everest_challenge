@@ -11,14 +11,16 @@ config_version=5
 [application]
 
 config/name="EverestChallenge"
-run/main_scene="res://Scenes/Maps/forest_1.tscn"
+run/main_scene="res://scenes/maps/Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-EnemyDb="*res://Scripts/Global/EnemyDatabase.gd"
-PlayerStats="*res://Scripts/Global/PlayerStats.gd"
+EnemyDb="*res://scripts/global/EnemyDatabase.gd"
+PlayerStats="*res://scripts/global/PlayerStats.gd"
+AudioManager="*res://scripts/global/AudioManager.gd"
+Translator="*res://scripts/global/Translator.gd"
 
 [display]
 

@@ -5,7 +5,6 @@ class_name PlayerLandingAttack
 var anim_player: AnimationPlayer
 
 func enter():
-	print("entered")
 	player.player_can_move = false
 	anim_player = player.get_node("AnimationPlayer")
 	if anim_player.animation_finished.is_connected(_on_animation_finished):

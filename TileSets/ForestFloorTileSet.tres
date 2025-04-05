@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=6 format=3 uid="uid://ituefgp8xyfd"]
 
-[ext_resource type="Texture2D" uid="uid://dxa07n5gvqvfn" path="res://assets/graphics/Scenery/tile_ground1.png" id="1_8aixi"]
-[ext_resource type="Texture2D" uid="uid://cmqf5r14bgl0t" path="res://assets/graphics/Scenery/tile_vegetation_1.png" id="2_l7hjk"]
+[ext_resource type="Texture2D" uid="uid://dxa07n5gvqvfn" path="res://assets/graphics/scenery/tile_ground1.png" id="1_8aixi"]
+[ext_resource type="Texture2D" uid="uid://cmqf5r14bgl0t" path="res://assets/graphics/scenery/tile_vegetation_1.png" id="2_l7hjk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5427y"]
 

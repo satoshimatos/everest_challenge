@@ -8,6 +8,7 @@ var anim_player: AnimationPlayer
 var fade_out_timer: int = 5
 
 func enter():
+	AudioManager.play("grunt2")
 	enemy.gravity = 0
 	enemy.get_node("CollisionShape2D").disabled = true
 	enemy.velocity.x = 0
