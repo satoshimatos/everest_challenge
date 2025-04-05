@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://svdailqyhsmu"
-path="res://.godot/imported/forest_parallax.png-ccc39231ae24f7f1b5d0baff5d28bb49.ctex"
+path="res://.godot/imported/forest_parallax.png-929e7fde759ef298db69c2cff99470bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/Scenery/forest_parallax.png"
-dest_files=["res://.godot/imported/forest_parallax.png-ccc39231ae24f7f1b5d0baff5d28bb49.ctex"]
+source_file="res://assets/graphics/scenery/forest_parallax.png"
+dest_files=["res://.godot/imported/forest_parallax.png-929e7fde759ef298db69c2cff99470bf.ctex"]
 
 [params]
 

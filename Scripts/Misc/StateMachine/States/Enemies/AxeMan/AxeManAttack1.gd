@@ -12,13 +12,13 @@ func enter():
 	if anim_player.animation_finished.is_connected(_on_animation_finished):
 		anim_player.animation_finished.disconnect(_on_animation_finished)
 	anim_player.animation_finished.connect(_on_animation_finished)
+	
 	enemy.velocity.x = 0
 	if (enemy.state_label):
 		update_state_label(enemy.state_label, self.name)
 
 func exit():
-	var attack_hitbox_collider = enemy.attack_hitbox.get_node("CollisionShape2D")
-	attack_hitbox_collider.set_deferred("disabled", true)
+	enemy.attack_hitbox_disabler(true)
 	enemy.velocity.x = 0
 	anim_player.speed_scale = 1
 
@@ -30,7 +30,7 @@ func physics_update(_delta: float):
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if abs(direction) > enemy.attack_distance:
-		Transitioned.emit(self, "chase")
+		call_deferred("emit_deferred_transition", "chase")
 	if direction < 0:
 		enemy.sprite.flip_h = true
 		enemy.attack_hitbox.position.x = -enemy.attack_hitbox_original_position.x

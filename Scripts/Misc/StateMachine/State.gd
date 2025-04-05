@@ -30,7 +30,11 @@ func _input(_event: InputEvent) -> void:
 	pass
 
 func _take_damage(body: CharacterBody2D, value: float):
+	print(owner)
 	if owner == body:
 		if "is_invulnerable" in body and body.is_invulnerable:
 			return  # Skip if the body is invulnerable
 		Transitioned.emit(self, "takedamage")
+
+func emit_deferred_transition(state: String):
+	Transitioned.emit(self, state)

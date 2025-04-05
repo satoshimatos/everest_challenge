@@ -1,22 +1,23 @@
-[gd_scene load_steps=29 format=3 uid="uid://txoo4dfo8h56"]
+[gd_scene load_steps=30 format=3 uid="uid://txoo4dfo8h56"]
 
 [ext_resource type="Texture2D" uid="uid://bu1dithutlsbd" path="res://assets/graphics/characters/enemies/Orc-Hurt.png" id="1_fc5vk"]
-[ext_resource type="Script" path="res://Scripts/Enemies/AxeMan.gd" id="1_wi8ut"]
+[ext_resource type="Script" path="res://scripts/enemies/AxeMan.gd" id="1_wi8ut"]
 [ext_resource type="Texture2D" uid="uid://d1lu50jhkdg0b" path="res://assets/graphics/characters/enemies/Orc-Death.png" id="2_7ajgy"]
-[ext_resource type="Shader" path="res://Shaders/Blink.gdshader" id="2_q1j06"]
+[ext_resource type="Shader" path="res://shaders/Blink.gdshader" id="2_q1j06"]
 [ext_resource type="Texture2D" uid="uid://bttxa31akea77" path="res://assets/graphics/characters/enemies/Orc-Idle.png" id="3_o4jjx"]
 [ext_resource type="Texture2D" uid="uid://ulq4x8ljnu5h" path="res://assets/graphics/characters/enemies/Orc-Walk.png" id="4_1dl7v"]
 [ext_resource type="Texture2D" uid="uid://cp6ltywuvawo" path="res://assets/graphics/characters/enemies/Orc-Attack01.png" id="5_ac57m"]
 [ext_resource type="Texture2D" uid="uid://coalhda3pagdb" path="res://assets/graphics/characters/enemies/Orc-Attack02.png" id="6_yltus"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="8_h8hxk"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Wander.gd" id="9_odq5l"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Chase.gd" id="10_ll1d1"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/AxeMan/AxeManAttack1.gd" id="11_ft6kp"]
-[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="12_6q8nr"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/TakeDamage.gd" id="12_ntk0b"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Die.gd" id="13_eesou"]
-[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="13_jqa8w"]
-[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="14_v7qs3"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/StateMachine.gd" id="8_h8hxk"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Wander.gd" id="9_odq5l"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Chase.gd" id="10_ll1d1"]
+[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/ui/enemy_hp_bar_black.png" id="12_6q8nr"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/TakeDamage.gd" id="12_ntk0b"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/axeman/AxeManAttack1.gd" id="12_ox0ei"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Die.gd" id="13_eesou"]
+[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/ui/enemy_hp.png" id="13_jqa8w"]
+[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/ui/enemy_hp_bar.png" id="14_v7qs3"]
+[ext_resource type="PackedScene" uid="uid://7w6llki52ypo" path="res://scenes/misc/AudioProxy.tscn" id="18_8oxl1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d4rj1"]
 shader = ExtResource("2_q1j06")
@@ -116,6 +117,20 @@ tracks/3/keys = {
 }, {
 "args": [true],
 "method": &"attack_hitbox_disabler"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioProxy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["heavy_swing"],
+"method": &"play"
 }]
 }
 
@@ -356,7 +371,7 @@ script = ExtResource("10_ll1d1")
 enemy = NodePath("../..")
 
 [node name="Attack1" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_ft6kp")
+script = ExtResource("12_ox0ei")
 enemy = NodePath("../..")
 
 [node name="TakeDamage" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
@@ -393,5 +408,7 @@ value = 50.0
 texture_under = ExtResource("12_6q8nr")
 texture_over = ExtResource("13_jqa8w")
 texture_progress = ExtResource("14_v7qs3")
+
+[node name="AudioProxy" parent="." instance=ExtResource("18_8oxl1")]
 
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

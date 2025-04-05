@@ -24,14 +24,13 @@ func physics_update(_delta: float):
 	if enemy.velocity.x != 0:
 		if enemy.anim_player.has_animation("walking"):
 			enemy.anim_player.play("walking")
-	
 	if abs(direction) > enemy.give_up_distance:
-		Transitioned.emit(self, "wander")
+		call_deferred("emit_deferred_transition", "wander")
 	if abs(direction) <= enemy.attack_distance:
-		Transitioned.emit(self, "attack1")
+		call_deferred("emit_deferred_transition", "attack1")
 
 func check_for_obstacle_height():
 	if enemy.has_node("ObstacleRayCast"):
 		var raycast = enemy.get_node("ObstacleRayCast") as RayCast2D
 		if raycast.is_colliding() and enemy.is_on_floor():
-			Transitioned.emit(self, "jumpahead")
+			call_deferred("emit_deferred_transition", "jumpahead")

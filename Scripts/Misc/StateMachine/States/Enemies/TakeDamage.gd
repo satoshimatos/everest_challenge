@@ -8,9 +8,10 @@ var anim_player: AnimationPlayer
 
 func update(_delta):
 	if enemy.current_hp <= 0:
-		Transitioned.emit(self, "die")
+		call_deferred("emit_deferred_transition", "die")
 
 func enter():
+	AudioManager.play("stab_weak")
 	enemy.can_move = false
 	flash()
 	anim_player = enemy.get_node("AnimationPlayer")
@@ -32,8 +33,9 @@ func physics_update(_delta: float):
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if enemy.current_hp > 0:
-		Transitioned.emit(self, "recoverydodge")
-		Transitioned.emit(self, "wander")
+		if randi() % 2 == 0:
+			call_deferred("emit_deferred_transition", "recoverydodge")
+		call_deferred("emit_deferred_transition", "chase")
 
 func flash():
 	var tween = create_tween()

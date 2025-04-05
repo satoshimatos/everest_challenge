@@ -1,26 +1,27 @@
-[gd_scene load_steps=34 format=3 uid="uid://71uren7uwvc6"]
+[gd_scene load_steps=35 format=3 uid="uid://71uren7uwvc6"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/AxeManHard.gd" id="1_4cuqd"]
-[ext_resource type="Shader" path="res://Shaders/Blink.gdshader" id="2_0jldh"]
+[ext_resource type="Script" path="res://scripts/enemies/AxeManHard.gd" id="1_4cuqd"]
+[ext_resource type="Shader" path="res://shaders/Blink.gdshader" id="2_0jldh"]
 [ext_resource type="Texture2D" uid="uid://bttxa31akea77" path="res://assets/graphics/characters/enemies/Orc-Idle.png" id="2_jclmx"]
 [ext_resource type="Texture2D" uid="uid://cp6ltywuvawo" path="res://assets/graphics/characters/enemies/Orc-Attack01.png" id="3_ywmr6"]
 [ext_resource type="Texture2D" uid="uid://coalhda3pagdb" path="res://assets/graphics/characters/enemies/Orc-Attack02.png" id="4_rrv15"]
 [ext_resource type="Texture2D" uid="uid://bu1dithutlsbd" path="res://assets/graphics/characters/enemies/Orc-Hurt.png" id="5_7fxva"]
 [ext_resource type="Texture2D" uid="uid://d1lu50jhkdg0b" path="res://assets/graphics/characters/enemies/Orc-Death.png" id="6_7jb1n"]
 [ext_resource type="Texture2D" uid="uid://ulq4x8ljnu5h" path="res://assets/graphics/characters/enemies/Orc-Walk.png" id="7_0b1w5"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="8_t50vr"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Wander.gd" id="9_msfj7"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/StateMachine.gd" id="8_t50vr"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Wander.gd" id="9_msfj7"]
 [ext_resource type="Texture2D" uid="uid://dlvii6litl3qq" path="res://assets/graphics/characters/enemies/Orc-Jump.png" id="9_xfr6t"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Chase.gd" id="10_ubj6a"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/AxeMan/AxeManAttack1.gd" id="11_5i8sx"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/TakeDamage.gd" id="12_v5rpo"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/Die.gd" id="13_wmkk0"]
-[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/UI/enemy_hp_bar_black.png" id="14_w6321"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/RecoveryDodge.gd" id="15_7c7si"]
-[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/UI/enemy_hp.png" id="15_y63gb"]
-[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/UI/enemy_hp_bar.png" id="16_1vndm"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Enemies/JumpAhead.gd" id="17_ix62q"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Chase.gd" id="10_ubj6a"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/TakeDamage.gd" id="12_v5rpo"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/axeman/AxeManAttack1.gd" id="13_7lphn"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/Die.gd" id="13_wmkk0"]
+[ext_resource type="Texture2D" uid="uid://cdjjqkb2q31iw" path="res://assets/graphics/ui/enemy_hp_bar_black.png" id="14_w6321"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/RecoveryDodge.gd" id="15_7c7si"]
+[ext_resource type="Texture2D" uid="uid://bs8rv11x8xa88" path="res://assets/graphics/ui/enemy_hp.png" id="15_y63gb"]
+[ext_resource type="Texture2D" uid="uid://c8xhpaot4ltux" path="res://assets/graphics/ui/enemy_hp_bar.png" id="16_1vndm"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/enemies/JumpAhead.gd" id="17_ix62q"]
 [ext_resource type="Texture2D" uid="uid://dmgn7pk7w1pol" path="res://assets/graphics/characters/enemies/TinySkull.png" id="21_uxjt4"]
+[ext_resource type="PackedScene" uid="uid://7w6llki52ypo" path="res://scenes/misc/AudioProxy.tscn" id="22_hcl3j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6u5jm"]
 shader = ExtResource("2_0jldh")
@@ -120,6 +121,20 @@ tracks/3/keys = {
 }, {
 "args": [true],
 "method": &"attack_hitbox_disabler"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioProxy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["heavy_swing"],
+"method": &"play"
 }]
 }
 
@@ -401,7 +416,7 @@ script = ExtResource("10_ubj6a")
 enemy = NodePath("../..")
 
 [node name="Attack1" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_5i8sx")
+script = ExtResource("13_7lphn")
 enemy = NodePath("../..")
 
 [node name="TakeDamage" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
@@ -456,5 +471,7 @@ position = Vector2(0, -6)
 target_position = Vector2(15, 0)
 collision_mask = 3
 collide_with_areas = true
+
+[node name="AudioProxy" parent="." instance=ExtResource("22_hcl3j")]
 
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

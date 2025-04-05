@@ -12,6 +12,7 @@ var knockback_direction: int = 0
 func enter():
 	if player.current_hp > 0:
 		player.give_invulnerability()
+	AudioManager.play("player_hit1")
 	knockback_timer = KNOCKBACK_DURATION  # Start knockback duration
 
 	var attacker_position = player.last_attacker.global_position
