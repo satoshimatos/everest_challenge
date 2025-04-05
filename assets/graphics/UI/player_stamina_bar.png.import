@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0meswmpuyt3x"
-path="res://.godot/imported/player_hp.png-41dbf70845a24ffad708972ace5d483c.ctex"
+uid="uid://v68jkqekm2vs"
+path="res://.godot/imported/player_stamina_bar.png-129b923670c9943c65f816a9f732ed07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/ui/player_hp.png"
-dest_files=["res://.godot/imported/player_hp.png-41dbf70845a24ffad708972ace5d483c.ctex"]
+source_file="res://assets/graphics/ui/player_stamina_bar.png"
+dest_files=["res://.godot/imported/player_stamina_bar.png-129b923670c9943c65f816a9f732ed07.ctex"]
 
 [params]
 

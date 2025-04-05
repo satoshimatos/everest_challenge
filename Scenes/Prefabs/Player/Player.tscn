@@ -1,21 +1,21 @@
 [gd_scene load_steps=31 format=3 uid="uid://d3y0bs5fsr21l"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5d2un"]
+[ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_5d2un"]
 [ext_resource type="Texture2D" uid="uid://bji2jsg48ipym" path="res://assets/graphics/characters/player/Soldier-Attack01.png" id="1_x3bwi"]
 [ext_resource type="Texture2D" uid="uid://dxsaf56cxcsdu" path="res://assets/graphics/characters/player/Soldier-Attack02.png" id="2_gty0k"]
 [ext_resource type="Texture2D" uid="uid://dg1cat5rlaaat" path="res://assets/graphics/characters/player/Soldier-Hurt.png" id="4_gs6n3"]
 [ext_resource type="Texture2D" uid="uid://du8c25rgy4eie" path="res://assets/graphics/characters/player/Soldier-Idle.png" id="5_pqv3n"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerFloorAttack.gd" id="6_e0wki"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerFloorAttack.gd" id="6_e0wki"]
 [ext_resource type="Texture2D" uid="uid://bgjbcmanowjh0" path="res://assets/graphics/characters/player/Soldier-Death.png" id="6_ilqna"]
 [ext_resource type="Texture2D" uid="uid://b8a6qr1xr7lns" path="res://assets/graphics/characters/player/Soldier-Walk.png" id="6_ug6w4"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerAerialAttack.gd" id="7_10d8m"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerFreefall.gd" id="8_eogkt"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerLandingAttack.gd" id="9_71eva"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/StateMachine.gd" id="9_ewiaw"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerDead.gd" id="10_fwx7a"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerIdle.gd" id="10_ts7ei"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerWalk.gd" id="11_2yo1g"]
-[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/States/Player/PlayerTakeDamage.gd" id="11_mcjyr"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerAerialAttack.gd" id="7_10d8m"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerFreefall.gd" id="8_eogkt"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerLandingAttack.gd" id="9_71eva"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/StateMachine.gd" id="9_ewiaw"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerDead.gd" id="10_fwx7a"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerIdle.gd" id="10_ts7ei"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerWalk.gd" id="11_2yo1g"]
+[ext_resource type="Script" path="res://scripts/misc/statemachine/states/player/PlayerTakeDamage.gd" id="11_mcjyr"]
 [ext_resource type="Texture2D" uid="uid://d23wgi6auln70" path="res://assets/graphics/characters/player/Soldier-Jump.png" id="14_sekal"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_miy04"]
@@ -131,7 +131,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_aafu1"]
 resource_name = "attack2"
-length = 0.2
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
